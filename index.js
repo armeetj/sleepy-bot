@@ -16,7 +16,7 @@ fs.readFile('token.txt', 'utf8', (err, data) =>
     {
         console.log(err.lineNumber);
     }
-    updateServerInfo();
+    updateServerInfoObject();
 });
 
 
@@ -95,11 +95,22 @@ client.on('message', msg =>
     console.log("message recieved from guild: "+ msg.guild.name + "\nid: " + msg.guild.id)
     
     var serverPrefix = serverInfo.servers[findServerInfoIndex(msg.guild.id)].prefix;
+    var input = msg.content.split(" ");
     console.log("serverPrefix: " + serverPrefix + "\n");
   
     if(msg.content === (serverPrefix + "ping"))
     {
       msg.reply('Pong!');
+    }else if(input[0] + " " + input[1] === (serverPrefix + "set prefix"))
+    {
+      var input = msg.content.split(" ");
+      if(input.length < 2)
+      {
+        msg.reply("Please type " + serverPrefix + "set prefix {new prefix here}");
+      }else{
+        serverInfo.servers[findServerInfoIndex(msg.guild.id)].prefix = input[2];
+        updateServerInfoJSON();
+      }
     }
   }catch(e)
   {
@@ -122,10 +133,23 @@ function findServerInfoIndex(guildID)
 }
 
 //updates the serverInfo variable by reading serverinfo.json
-function updateServerInfo ()
+function updateServerInfoObject ()
 {
   fs.readFile('serverinfo.json', 'utf8', (err, data) => 
   {
     serverInfo = JSON.parse(data);
   })
+}
+
+//writes to the JSON file
+function updateServerInfoJSON ()
+{
+  fs.writeFile("serverinfo.json", JSON.stringify(serverInfo), (err)=>
+  {
+    if(err)
+    {
+      console.log("ERROR!");
+      throw err;
+    }
+  });
 }
