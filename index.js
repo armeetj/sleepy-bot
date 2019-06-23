@@ -34,6 +34,10 @@ client.on('ready', () =>
         console.log("server: " + client.guilds.get(keyArray[i]).name + ", id: "+ keyArray[i]);
     }
     console.log("\n")
+
+    //set the presence
+    client.user.setActivity("sleeping in  " + keyArray.length + " servers..."); 
+
 });
 
 
