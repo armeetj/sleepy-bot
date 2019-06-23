@@ -14,5 +14,8 @@
     "bot"
   ],
   "author": "xarmeetx",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
 }
