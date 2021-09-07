@@ -1,5 +1,5 @@
 # Sleepy Bot 🌙
-`@armeetjatyani` `2019` `Heroku` `JavaScript` `Discord.js` `mongo-db`
+`@armeetjatyani` `2019` `heroku` `javascript` `discord.js` `mongo-db`
 
 ## Intro
 - I learned how to use NPM and discord.js (https://discord.js.org/#/) to create a Discord Bot
